@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Timelapse Creator</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <h1>Timelapse Video Creator</h1>
+
+    <div class="control-group">
+        <label for="imageFolder">Bilder-Ordner:</label>
+        <input type="text" id="imageFolder" readonly placeholder="Bitte Ordner auswählen...">
+        <button id="selectImageFolderBtn">Auswählen</button>
+    </div>
+
+    <div class="control-group">
+        <label for="outputFolder">Speicherort:</label>
+        <input type="text" id="outputFolder" readonly placeholder="Bitte Ordner auswählen...">
+        <button id="selectOutputFolderBtn">Auswählen</button>
+    </div>
+
+    <div class="control-group framerate-group">
+        <div>
+            <label for="inputRate">Eingabe-Framerate:</label>
+            <input type="number" id="inputRate" value="10">
+        </div>
+        <div>
+            <label for="outputRate">Ausgabe-Framerate:</label>
+            <input type="number" id="outputRate" value="60">
+        </div>
+    </div>
+    
+    <button id="startBtn">Timelapse erstellen</button>
+
+    <div class="progress-container">
+        <div class="progress-bar-container">
+            <div id="progressBar" class="progress-bar"></div>
+        </div>
+        <p id="status">Status: Bereit</p>
+    </div>
+
+    <script src="./renderer.js"></script>
+</body>
+</html>
