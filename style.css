@@ -67,3 +67,26 @@ button:hover { background-color: #79cff4; }
     text-align: center;
     color: #e5c07b;
 }
+/* Stile für die neuen Elemente */
+.slider-group, .checkbox-group {
+    display: flex;
+    align-items: center;
+}
+input[type="range"] {
+    flex-grow: 1;
+    margin: 0 10px;
+}
+.slider-value {
+    min-width: 25px;
+    text-align: center;
+    font-weight: bold;
+    color: #98c379;
+}
+.checkbox-group label {
+    min-width: 300px;
+}
+.checkbox-group span {
+    font-size: 12px;
+    color: #5c6370;
+    margin-left: 10px;
+}

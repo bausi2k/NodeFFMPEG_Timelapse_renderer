@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Timelapse Creator</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Timelapse Video Creator</h1>
@@ -20,17 +20,35 @@
         <button id="selectOutputFolderBtn">Auswählen</button>
     </div>
 
-    <div class="control-group framerate-group">
-        <div>
-            <label for="inputRate">Eingabe-Framerate:</label>
-            <input type="number" id="inputRate" value="10">
-        </div>
-        <div>
-            <label for="outputRate">Ausgabe-Framerate:</label>
-            <input type="number" id="outputRate" value="60">
-        </div>
+    <div class="control-group slider-group">
+        <label for="inputRate">Eingabe-Framerate:</label>
+        <input type="range" id="inputRate" min="1" max="60" value="10">
+        <span id="inputRateValue" class="slider-value">10</span>
+    </div>
+
+    <div class="control-group slider-group">
+        <label for="outputRate">Ausgabe-Framerate:</label>
+        <input type="range" id="outputRate" min="1" max="60" value="60">
+        <span id="outputRateValue" class="slider-value">60</span>
     </div>
     
+    <div class="control-group checkbox-group">
+        <label for="enableInterpolation">Bewegungs-Interpolation (`minterpolate`):</label>
+        <input type="checkbox" id="enableInterpolation" checked>
+        <span>(Für flüssigere Videos, benötigt mehr Rechenzeit)</span>
+    </div>
+	
+   <div class="control-group">
+        <label for="rotationOption">Video drehen:</label>
+        <select id="rotationOption">
+            <option value="none">Keine Drehung</option>
+            <option value="90_cw">90° im Uhrzeigersinn (CW)</option>
+            <option value="90_ccw">90° gegen Uhrzeigersinn (CCW)</option>
+            <option value="180">180°</option>
+        </select>
+    </div>
+
+    <div class="control-group checkbox-group">
     <button id="startBtn">Timelapse erstellen</button>
 
     <div class="progress-container">

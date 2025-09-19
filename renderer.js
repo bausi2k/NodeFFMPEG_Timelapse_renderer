@@ -1,3 +1,6 @@
+// renderer.js
+
+// --- Element-Referenzen ---
 const imageFolderInput = document.getElementById('imageFolder');
 const outputFolderInput = document.getElementById('outputFolder');
 const selectImageFolderBtn = document.getElementById('selectImageFolderBtn');
@@ -5,10 +8,15 @@ const selectOutputFolderBtn = document.getElementById('selectOutputFolderBtn');
 const startBtn = document.getElementById('startBtn');
 const progressBar = document.getElementById('progressBar');
 const statusText = document.getElementById('status');
-const inputRate = document.getElementById('inputRate');
-const outputRate = document.getElementById('outputRate');
+const inputRateSlider = document.getElementById('inputRate');
+const outputRateSlider = document.getElementById('outputRate');
+const inputRateValue = document.getElementById('inputRateValue');
+const outputRateValue = document.getElementById('outputRateValue');
+const enableInterpolationCheckbox = document.getElementById('enableInterpolation');
+const rotationOption = document.getElementById('rotationOption');
 
-// Ordnerauswahl-Buttons
+// --- Event Listeners ---
+
 selectImageFolderBtn.addEventListener('click', async () => {
     const filePath = await window.electronAPI.openImageDialog();
     if (filePath) imageFolderInput.value = filePath;
@@ -19,13 +27,22 @@ selectOutputFolderBtn.addEventListener('click', async () => {
     if (filePath) outputFolderInput.value = filePath;
 });
 
-// Start-Button
+inputRateSlider.addEventListener('input', (event) => {
+    inputRateValue.innerText = event.target.value;
+});
+
+outputRateSlider.addEventListener('input', (event) => {
+    outputRateValue.innerText = event.target.value;
+});
+
 startBtn.addEventListener('click', () => {
     const options = {
         imageFolder: imageFolderInput.value,
         outputFolder: outputFolderInput.value,
-        inputFrameRate: inputRate.value,
-        outputFrameRate: outputRate.value
+        inputFrameRate: inputRateSlider.value,
+        outputFrameRate: outputRateSlider.value,
+        enableInterpolation: enableInterpolationCheckbox.checked,
+        rotation: rotationOption.value
     };
 
     if (!options.imageFolder || !options.outputFolder) {
@@ -40,20 +57,27 @@ startBtn.addEventListener('click', () => {
     window.electronAPI.startProcessing(options);
 });
 
-// Listener für den Fortschritt
-window.electronAPI.onUpdateProgress((percent) => {
-    progressBar.style.width = `${percent}%`;
-    statusText.innerText = `Verarbeite: ${Math.round(percent)}%`;
+// --- IPC Listener vom Backend ---
+
+window.electronAPI.onUpdateProgress((progress) => {
+    if (progress.percent) {
+        const cappedPercent = Math.min(progress.percent, 100);
+        progressBar.style.width = `${cappedPercent}%`;
+    }
+    
+    const timemark = progress.timemark || '00:00:00.00';
+    const fps = progress.currentFps || 0;
+    const frames = progress.frames || 0;
+
+    statusText.innerText = `Zeit gerendert: ${timemark} | Geschwindigkeit: ${fps} fps | Frames: ${frames}`;
 });
 
-// Listener für das Ende
 window.electronAPI.onProcessingDone((message) => {
     progressBar.style.width = '100%';
     statusText.innerText = message;
     startBtn.disabled = false;
 });
 
-// Listener für Fehler
 window.electronAPI.onProcessingError((message) => {
     statusText.innerText = message;
     progressBar.style.width = '0%';
