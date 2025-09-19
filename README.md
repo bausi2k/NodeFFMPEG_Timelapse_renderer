@@ -1,14 +1,16 @@
 # Node.js FFmpeg Timelapse Renderer
 
-![Screenshot der Anwendung](https//i.imgur.com/DeinScreenshot.png) Eine einfache Desktop-Anwendung, erstellt mit Node.js und Electron, um aus einem Ordner voller JPEG-Bilder ein flüssiges Zeitraffer-Video zu erstellen. Die Anwendung nutzt FFmpeg im Hintergrund für die Videoverarbeitung.
+![Screenshot der Anwendung](https://i.imgur.com/DeinScreenshot.png) Eine einfache Desktop-Anwendung, erstellt mit Node.js und Electron, um aus einem Ordner voller JPEG-Bilder ein flüssiges Zeitraffer-Video zu erstellen. Die Anwendung nutzt FFmpeg im Hintergrund für die Videoverarbeitung.
 
 ## ✨ Features
 
 -   **Einfache Bedienung:** Wähle einfach einen Ordner mit Bildern und einen Speicherort aus.
--   **Flüssige Videos:** Nutzt den `minterpolate`-Filter von FFmpeg, um Zwischenbilder für eine weiche Bewegung zu generieren.
--   **Anpassbare Geschwindigkeit:** Eingabe- und Ausgabe-Framerate können frei eingestellt werden.
+-   **Video-Rotation:** Optionale Drehung des finalen Videos um 90° (im oder gegen den Uhrzeigersinn) oder 180°.
+-   **Flüssige Videos:** Nutzt optional den `minterpolate`-Filter von FFmpeg, um Zwischenbilder für eine weiche Bewegung zu generieren.
+-   **Anpassbare Geschwindigkeit:** Eingabe- und Ausgabe-Framerate können einfach über Slider (1-60 fps) eingestellt werden.
 -   **Farbkorrektur:** Stellt sicher, dass die Farben aus den JPEG-Bildern korrekt in das Videoformat konvertiert werden.
--   **Live-Fortschritt:** Ein Fortschrittsbalken zeigt den aktuellen Stand der Konvertierung an.
+-   **Detaillierter Fortschritt:** Zeigt die bereits gerenderte Videolänge, Verarbeitungsgeschwindigkeit (fps) und die Anzahl der erstellten Frames an.
+-   **Automatisches Öffnen:** Nach erfolgreicher Erstellung wird der Ordner mit der fertigen Videodatei automatisch geöffnet.
 
 ## 🚀 Setup & Installation
 
@@ -37,13 +39,11 @@ Um das Projekt lokal auszuführen, benötigst du [Node.js](https://nodejs.org/).
     npm start
     ```
 
-2.  **Wähle den Bilder-Ordner** aus, der deine nummerierten oder mit Zeitstempel versehenen `.jpg`-Dateien enthält.
+2.  Wähle den **Bilder-Ordner** und den **Speicherort**.
 
-3.  **Wähle einen Speicherort** für das fertige Video.
+3.  Passe die **Framerates**, die **Rotation** und die **Interpolation** nach Wunsch an.
 
-4.  **Passe die Framerates** bei Bedarf an (Standard: 10 fps Input, 60 fps Output).
-
-5.  Klicke auf **"Timelapse erstellen"** und warte, bis der Prozess abgeschlossen ist.
+4.  Klicke auf **"Timelapse erstellen"** und warte, bis der Prozess abgeschlossen ist.
 
 ---
 Erstellt mit ❤️ und Code.
