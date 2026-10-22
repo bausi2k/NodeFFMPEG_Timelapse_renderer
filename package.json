@@ -13,6 +13,6 @@
     "fluent-ffmpeg": "^2.1.2"
   },
   "devDependencies": {
-    "electron": "^31.0.2" 
+    "electron": "^42.11.3" 
   }
 }
